@@ -578,5 +578,153 @@ export enum WaypointType {
 }
 
 export interface Waypoint {
-    
+  symbol: string;
+  type: WaypointType;
+  systemSymbol: string;
+  x: number;
+  y: number;
+  orbitals: {
+    symbol: string[];
+  };
+  orbits?: string;
+  faction?: FactionSymbol;
+  traits: WaypointTrait[];
+  modifiers?: WaypointModifier[];
+  chart?: Chart;
+  isUnderConstruction: boolean;
+}
+
+export interface WaypointTrait {
+  symbol: WaypointTraitSymbol;
+  name: string;
+  description: string;
+}
+
+export interface WaypointModifier {
+  symbol: WaypointModifierSymbol;
+  name: string;
+  description: string;
+}
+
+export enum WaypointTraitSymbol {
+  UNCHARTED,
+  UNDER_CONSTRUCTION,
+  MARKETPLACE,
+  SHIPYARD,
+  OUTPOST,
+  SCATTERED_SETTLEMENTS,
+  SPRAWLING_CITIES,
+  MEGA_STRUCTURES,
+  PIRATE_BASE,
+  OVERCROWDED,
+  HIGH_TECH,
+  CORRUPT,
+  BUREAUCRATIC,
+  TRADING_HUB,
+  INDUSTRIAL,
+  BLACK_MARKET,
+  RESEARCH_FACILITY,
+  MILITARY_BASE,
+  SURVEILLANCE_OUTPOST,
+  EXPLORATION_OUTPOST,
+  MINERAL_DEPOSITS,
+  COMMON_METAL_DEPOSITS,
+  PRECIOUS_METAL_DEPOSITS,
+  RARE_METAL_DEPOSITS,
+  METHANE_POOLS,
+  ICE_CRYSTALS,
+  EXPLOSIVE_GASES,
+  STRONG_MAGNETOSPHERE,
+  VIBRANT_AURORAS,
+  SALT_FLATS,
+  CANYONS,
+  PERPETUAL_DAYLIGHT,
+  PERPETUAL_OVERCAST,
+  DRY_SEABEDS,
+  MAGMA_SEAS,
+  SUPERVOLCANOES,
+  ASH_CLOUDS,
+  VAST_RUINS,
+  MUTATED_FLORA,
+  TERRAFORMED,
+  EXTREME_TEMPERATURES,
+  EXTREME_PRESSURE,
+  DIVERSE_LIFE,
+  SCARCE_LIFE,
+  FOSSILS,
+  WEAK_GRAVITY,
+  STRONG_GRAVITY,
+  CRUSHING_GRAVITY,
+  TOXIC_ATMOSPHERE,
+  CORROSIVE_ATMOSPHERE,
+  BREATHABLE_ATMOSPHERE,
+  THIN_ATMOSPHERE,
+  JOVIAN,
+  ROCKY,
+  VOLCANIC,
+  FROZEN,
+  SWAMP,
+  BARREN,
+  TEMPERATE,
+  JUNGLE,
+  OCEAN,
+  RADIOACTIVE,
+  MICRO_GRAVITY_ANOMALIES,
+  DEBRIS_CLUSTER,
+  DEEP_CRATERS,
+  SHALLOW_CRATERS,
+  UNSTABLE_COMPOSITION,
+  HOLLOWED_INTERIOR,
+  STRIPPED,
+}
+
+export enum WaypointModifierSymbol {
+  STRIPPED,
+  UNSTABLE,
+  RADIATION_LEAK,
+  CRITICAL_LIMIT,
+  CIVIL_UNREST,
+}
+
+export interface Chart {
+  waypointSymbol: string;
+  submittedBy: string;
+  submittedOn: Date;
+}
+
+export interface Agent {
+  accountId: string;
+  symbol: string; // 3 to 14
+  headquarters: string;
+  credits: number;
+  startingFaction: FactionSymbol;
+  shipCount: number;
+}
+
+export interface Contract {
+  id: number;
+  factionSymbol: FactionSymbol;
+  type: "PROCUREMENT" | "TRANSPORT" | "SHUTTLE";
+  terms: ContractTerms;
+  accepted: boolean;
+  fulfilled: boolean;
+  deadlineToAccept?: Date;
+}
+
+export interface ContractTerms {
+  deadline: Date;
+  payment: ContractPayment;
+  deliver?: ContractDeliverItem[];
+}
+
+export interface ContractPayment {
+  onAccepted: number;
+  onFulfilled: number;
+}
+
+export interface ContractDeliverItem {
+  itemSymbol: ItemSymbol;
+  destinationSymbol: string;
+  unitsRequired: number;
+  unitsFulfilled: number;
 }
